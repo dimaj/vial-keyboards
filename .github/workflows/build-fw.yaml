@@ -49,13 +49,8 @@ jobs:
           mv *.hex *.bin *.uf2 /github/workspace/output || true
           echo "outdir=output" >> "$GITHUB_OUTPUT"
 
-  upload:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
       - name: Upload firmware
         uses: actions/upload-artifact@v3
         with:
-          name: keychron_q3_fw
+          name: keychron_q3_fw_${{ github.run_number }}
           path: output
