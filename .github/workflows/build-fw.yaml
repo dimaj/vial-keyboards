@@ -46,8 +46,7 @@ jobs:
         run: |
           mkdir -p /github/workspace/output
           cd vial-qmk
-          ls -l
-          mv *.hex *.bin *.uf2 /github/workspace/output
+          mv *.hex *.bin *.uf2 /github/workspace/output || true
           echo "outdir=output" >> "$GITHUB_OUTPUT"
 
   upload:
