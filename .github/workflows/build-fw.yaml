@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout current repo
         uses: actions/checkout@v4
+        with:
+          path: my-repo
 
       - name: Disable git safe directory checks
         run : git config --global --add safe.directory '*'
@@ -32,7 +34,7 @@ jobs:
 
       - name: Copy keyboard definiitons from this repo into vial
         run: |
-          cp -rT . vial-qmk/keyboards/
+          cp -rT my-repo/* vial-qmk/keyboards/
 
       - name: Build firmware
         run: qmk compile -kb keychron/q3/ansi_encoder -km vial
