@@ -37,7 +37,9 @@ jobs:
           cp -rT my-repo/* vial-qmk/keyboards/
 
       - name: Build firmware
-        run: qmk compile -kb keychron/q3/ansi_encoder -km vial
+        run: |
+          cd vial-qmk
+          qmk compile -kb keychron/q3/ansi_encoder -km vial
 
       - name: Save firmware to shared directory
         id: save
