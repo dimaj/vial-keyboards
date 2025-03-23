@@ -6,8 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     container: ghcr.io/qmk/qmk_cli
 
-    outputs:
-      outdir: ${{ steps.save.outputs.outdir }}
+    # outputs:
+    #   outdir: ${{ steps.save.outputs.outdir }}
 
     steps:
       - name: Checkout current repo
@@ -41,16 +41,19 @@ jobs:
           cd vial-qmk
           qmk compile -kb keychron/q3/ansi_encoder -km vial
 
-      - name: Save firmware to shared directory
-        id: save
-        run: |
-          mkdir -p /github/workspace/output
-          cd vial-qmk
-          mv *.hex *.bin *.uf2 /github/workspace/output || true
-          echo "outdir=output" >> "$GITHUB_OUTPUT"
+      # - name: Save firmware to shared directory
+      #   id: save
+      #   run: |
+      #     mkdir -p /github/workspace/output
+      #     cd vial-qmk
+      #     mv *.hex *.bin *.uf2 /github/workspace/output || true
+      #     echo "outdir=output" >> "$GITHUB_OUTPUT"
 
       - name: Upload firmware
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: keychron_q3_fw_${{ github.run_number }}
-          path: output
+          path: |
+            vial-qmk/*.bin
+            vial-qmk/*.hex
+            vial-qmk/*.uf2
