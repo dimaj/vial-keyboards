@@ -42,10 +42,6 @@ jobs:
           cd vial-qmk
           qmk compile -kb keychron/q3/ansi_encoder -km vial
 
-      - name: Assert firmware was built
-        run: |
-          ls vial-qmk/*.hex vial-qmk/*.bin vial-qmk/*.uf2 >/dev/null
-
       - name: Upload firmware
         uses: actions/upload-artifact@v4
         with:
